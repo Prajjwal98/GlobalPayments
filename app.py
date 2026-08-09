@@ -94,6 +94,42 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], .main, .b
     font-family: 'Roboto', 'Google Sans', -apple-system, sans-serif !important;
 }}
 
+[data-testid="stSidebar"] {{
+    background-color: var(--bg-subtle) !important;
+    border-right: 1px solid var(--border) !important;
+}}
+
+/* Streamlit Buttons Override */
+.stButton button[kind="primary"] {{
+    background-color: var(--accent) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 14px rgba(26, 115, 232, 0.4) !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+}}
+.stButton button[kind="primary"]:hover {{
+    background-color: var(--accent-hover) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(26, 115, 232, 0.6) !important;
+    color: white !important;
+}}
+
+.stButton button[kind="secondary"] {{
+    background-color: transparent !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+}}
+.stButton button[kind="secondary"]:hover {{
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    background-color: rgba(26, 115, 232, 0.05) !important;
+}}
+
 h1, h2, h3, h4, h5, h6 {{
     font-family: 'Google Sans', sans-serif !important;
     color: var(--text) !important;
