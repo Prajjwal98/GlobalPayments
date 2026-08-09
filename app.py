@@ -43,20 +43,22 @@ if "model_generated" not in st.session_state:
 # ==========================================
 # 3. CSS DESIGN SYSTEM
 # ==========================================
-bg = "#202124" if IS_DARK else "#F8F9FA"
-bg_subtle = "#292A2D" if IS_DARK else "#F1F3F4"
-card = "#292A2D" if IS_DARK else "#FFFFFF"
-border = "#5F6368" if IS_DARK else "#DADCE0"
-border_subtle = "#3C4043" if IS_DARK else "#F1F3F4"
-text = "#E8EAED" if IS_DARK else "#202124"
-text_muted = "#9AA0A6" if IS_DARK else "#5F6368"
-text_dim = "#80868B" if IS_DARK else "#70757A"
+bg = "#0B132B" if IS_DARK else "#F8F9FA"
+bg_subtle = "rgba(11, 19, 43, 0.6)" if IS_DARK else "rgba(255, 255, 255, 0.7)"
+card = "rgba(28, 37, 65, 0.65)" if IS_DARK else "rgba(255, 255, 255, 0.85)"
+border = "rgba(255, 255, 255, 0.1)" if IS_DARK else "rgba(0, 0, 0, 0.08)"
+border_subtle = "rgba(255, 255, 255, 0.05)" if IS_DARK else "rgba(0, 0, 0, 0.04)"
+text = "#F8FAFC" if IS_DARK else "#0B132B"
+text_muted = "#94A3B8" if IS_DARK else "#475569"
+text_dim = "#64748B" if IS_DARK else "#94A3B8"
+shadow = "0 8px 32px rgba(0, 0, 0, 0.3)" if IS_DARK else "0 8px 32px rgba(0, 0, 0, 0.06)"
 
 css = f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
-/* Google Material Variables */
+/* Glassmorphism & Colors */
 :root {{
     --bg: {bg};
     --bg-subtle: {bg_subtle};
@@ -68,14 +70,16 @@ css = f"""
     --text-dim: {text_dim};
     --accent: #1A73E8;
     --accent-hover: #1558D6;
-    --green: #188038;
-    --green-muted: #E6F4EA;
+    --green: #20C997;
+    --green-muted: rgba(32, 201, 151, 0.15);
     --red: #D93025;
-    --red-muted: #FCE8E6;
-    --amber: #F9AB00;
-    --amber-muted: #FEF7E0;
-    --shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
-    --radius: 8px;
+    --red-muted: rgba(217, 48, 37, 0.15);
+    --amber: #F59E0B;
+    --amber-muted: rgba(245, 158, 11, 0.15);
+    --purple: #8B5CF6;
+    --purple-muted: rgba(139, 92, 246, 0.15);
+    --shadow: {shadow};
+    --radius: 14px;
 }}
 
 /* Hide Streamlit chrome */
@@ -95,20 +99,38 @@ h1, h2, h3, h4, h5, h6 {{
     color: var(--text) !important;
 }}
 
+.section-header {{
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}}
+
+.material-symbols-outlined {{
+    vertical-align: middle;
+}}
+
 .block-container {{
     padding: 2rem 3rem 4rem !important;
     max-width: 1400px !important;
 }}
 
 /* Component styling */
-.metric-card {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }}
+.metric-card {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: all 0.3s ease; }}
+.metric-card:hover {{ transform: translateY(-3px); border-color: rgba(255,255,255,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }}
 .metric-label {{ font-family: 'Google Sans', sans-serif; font-size: 0.875rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.5rem; }}
 .metric-value {{ font-family: 'Google Sans', sans-serif; font-size: 2.25rem; font-weight: 400; color: var(--text); line-height: 1.2; }}
 .metric-delta {{ font-size: 0.75rem; font-weight: 500; margin-top: 0.75rem; padding: 4px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; }}
 .delta-up {{ color: var(--green); background: var(--green-muted); }}
 .delta-down {{ color: var(--red); background: var(--red-muted); }}
 
-.chart-wrap {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.5rem 0.5rem; box-shadow: var(--shadow); }}
+.chart-wrap {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.5rem 0.5rem; box-shadow: var(--shadow); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: all 0.3s ease; }}
+.chart-wrap:hover {{ transform: translateY(-2px); border-color: rgba(255,255,255,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }}
 .chart-title {{ font-family: 'Google Sans', sans-serif; font-size: 1.125rem; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }}
 .chart-subtitle {{ font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; }}
 
@@ -120,16 +142,18 @@ h1, h2, h3, h4, h5, h6 {{
 .data-table tbody tr:hover {{ background-color: var(--bg-subtle); }}
 .data-table td.highlight {{ background-color: #E8F0FE; color: var(--accent); font-weight: 500; }}
 
-.badge {{ display: inline-block; padding: 4px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 500; font-family: 'Google Sans', sans-serif; }}
-.badge-green {{ color: var(--green); background: var(--green-muted); border: 1px solid #CEEAD6; }}
-.badge-blue {{ color: var(--accent); background: #E8F0FE; border: 1px solid #D2E3FC; }}
+.badge {{ display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 500; font-family: 'Google Sans', sans-serif; }}
+.badge-green {{ color: var(--green); background: var(--green-muted); border: 1px solid rgba(32, 201, 151, 0.2); }}
+.badge-blue {{ color: var(--accent); background: rgba(26, 115, 232, 0.15); border: 1px solid rgba(26, 115, 232, 0.2); }}
+.badge-purple {{ color: var(--purple); background: var(--purple-muted); border: 1px solid rgba(139, 92, 246, 0.2); }}
 
-.brand {{ font-family: 'Google Sans', sans-serif; font-size: 1.5rem; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 0.75rem; }}
+.brand {{ font-family: 'Google Sans', sans-serif; font-size: 1.3rem; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 0.75rem; }}
 .brand-icon {{ color: var(--accent); font-size: 1.75rem; }}
 
-.step-card {{ background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }}
-.step-title {{ font-size: 0.9rem; font-weight: 600; color: var(--text); }}
-.step-desc {{ font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }}
+.step-card {{ background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; margin-bottom: 1rem; backdrop-filter: blur(8px); transition: all 0.3s ease; }}
+.step-card:hover {{ transform: translateY(-2px); border-color: rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }}
+.step-title {{ font-size: 0.9rem; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 6px; }}
+.step-desc {{ font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.4; }}
 
 hr {{ border-color: var(--border) !important; }}
 </style>
@@ -233,54 +257,64 @@ if st.session_state.step == 1:
     st.markdown("### Step 1: Data Ingestion & Enrichment")
     st.markdown("<p style='color: var(--text-muted); margin-bottom: 20px;'>Transforming raw, undocumented operational data into understandable assets using Gemini LLM.</p>", unsafe_allow_html=True)
     
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("**Raw Operational Data** (Before)")
-        render_table(df_raw)
+    if st.session_state.data_enriched:
+        main_col, right_panel = st.columns([2.8, 1])
+    else:
+        main_col, right_panel = st.columns([1, 0.01])
         
-    with col2:
-        st.markdown("**AI Enriched Data** (After)")
-        if st.session_state.data_enriched:
-            df_enriched = df_raw.copy()
-            df_enriched.rename(columns={
-                "txn_id": "Transaction ID",
-                "usr_idx": "User ID",
-                "merch_cd": "Merchant Code",
-                "amt_val": "Transaction Amount ($)",
-                "ts_dt": "Timestamp",
-                "cc_num": "Credit Card",
-                "usr_nm": "Customer Name"
-            }, inplace=True)
+    with main_col:
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**Raw Operational Data** (Before)")
+            render_table(df_raw)
             
-            # AI Derived fields
-            df_enriched["Customer LTV ($)"] = [round(val * random.uniform(1.5, 3.0), 2) for val in df_enriched["Transaction Amount ($)"]]
-            df_enriched["Segment"] = ["High Value", "Mid Value", "Low Value", "High Value", "Mid Value"]
-            
-            render_table(df_enriched, highlight_cols=["Customer LTV ($)", "Segment"])
-            st.success("✨ Metadata descriptions generated & derived fields added via Gemini API.")
-            
-            with st.expander("View Generated Metadata (Data Dictionary)"):
-                st.markdown("""
-                | Column Name | Generated Description |
-                |---|---|
-                | **Transaction ID** | Unique identifier for the payment transaction. |
-                | **User ID** | Identifier mapping to the customer profile. |
-                | **Merchant Code** | Internal code for the acquiring merchant. |
-                | **Transaction Amount ($)** | Total fiat value of the transaction in USD. |
-                | **Timestamp** | Date and time the transaction was authorized. |
-                | **Credit Card** | Masked primary account number (PAN). |
-                | **Customer Name** | Registered name of the cardholder. |
-                | **Customer LTV ($)** | *[AI Derived]* Predictive metric for customer lifetime value based on spend history. |
-                | **Segment** | *[AI Derived]* Categorical segmentation of the user for marketing targeting. |
-                """)
-        else:
-            st.info("Awaiting AI enrichment...")
-            if st.button("✨ Suggest Derived Fields & Descriptions", type="primary"):
-                with st.spinner("Analyzing schema with Gemini LLM..."):
-                    time.sleep(2)
-                    st.session_state.data_enriched = True
-                    st.rerun()
+        with col2:
+            st.markdown("**AI Enriched Data** (After)")
+            if st.session_state.data_enriched:
+                df_enriched = df_raw.copy()
+                df_enriched.rename(columns={
+                    "txn_id": "Transaction ID",
+                    "usr_idx": "User ID",
+                    "merch_cd": "Merchant Code",
+                    "amt_val": "Transaction Amount ($)",
+                    "ts_dt": "Timestamp",
+                    "cc_num": "Credit Card",
+                    "usr_nm": "Customer Name"
+                }, inplace=True)
+                
+                # AI Derived fields
+                df_enriched["Customer LTV ($)"] = [round(val * random.uniform(1.5, 3.0), 2) for val in df_enriched["Transaction Amount ($)"]]
+                df_enriched["Segment"] = ["High Value", "Mid Value", "Low Value", "High Value", "Mid Value"]
+                
+                render_table(df_enriched, highlight_cols=["Customer LTV ($)", "Segment"])
+                st.success("Metadata descriptions generated & derived fields added via Gemini API.")
+            else:
+                st.info("Awaiting AI enrichment...")
+                if st.button("Suggest Derived Fields & Descriptions", type="primary"):
+                    with st.spinner("Analyzing schema with Gemini LLM..."):
+                        time.sleep(2)
+                        st.session_state.data_enriched = True
+                        st.rerun()
+
+    if st.session_state.data_enriched:
+        with right_panel:
+            st.markdown("""
+            <div class="chart-wrap" style="height: 100%; border-left: 2px solid var(--purple); padding-top: 1rem;">
+                <div class="section-header"><span class="material-symbols-outlined" style="font-size:16px;">auto_awesome</span> AI Metadata Dictionary</div>
+                <div style="font-size: 0.85rem; line-height: 1.4; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 12px;">
+                    <div><strong>Transaction ID</strong><br/><span style="color:var(--text-muted);">Unique identifier for the payment transaction.</span></div>
+                    <div><strong>User ID</strong><br/><span style="color:var(--text-muted);">Identifier mapping to the customer profile.</span></div>
+                    <div><strong>Merchant Code</strong><br/><span style="color:var(--text-muted);">Internal code for the acquiring merchant.</span></div>
+                    <div><strong>Transaction Amount ($)</strong><br/><span style="color:var(--text-muted);">Total fiat value of the transaction in USD.</span></div>
+                    <div><strong>Timestamp</strong><br/><span style="color:var(--text-muted);">Date and time the transaction was authorized.</span></div>
+                    <div><strong>Credit Card</strong><br/><span style="color:var(--text-muted);">Masked primary account number (PAN).</span></div>
+                    <div><strong>Customer Name</strong><br/><span style="color:var(--text-muted);">Registered name of the cardholder.</span></div>
+                    <div><strong>Customer LTV ($)</strong> <span class="badge badge-purple" style="font-size:10px; padding:2px 6px; margin-left:4px;">AI Derived</span><br/><span style="color:var(--text-muted);">Predictive metric for customer lifetime value based on spend history.</span></div>
+                    <div><strong>Segment</strong> <span class="badge badge-purple" style="font-size:10px; padding:2px 6px; margin-left:4px;">AI Derived</span><br/><span style="color:var(--text-muted);">Categorical segmentation of the user for marketing targeting.</span></div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
 elif st.session_state.step == 2:
     st.markdown("### Step 2: Governance & Security Scanning")
@@ -294,7 +328,7 @@ elif st.session_state.step == 2:
     
     st.markdown("<br/>", unsafe_allow_html=True)
     
-    mask_toggle = st.toggle("🛡️ Apply AI Masking Policies", value=st.session_state.data_masked)
+    mask_toggle = st.toggle("Apply AI Masking Policies", value=st.session_state.data_masked)
     st.session_state.data_masked = mask_toggle
     
     df_display = df_raw.copy()
@@ -509,4 +543,4 @@ elif st.session_state.step == 5:
             render_table(df_final)
             
             st.markdown("<br/>", unsafe_allow_html=True)
-            st.success("✅ **Data Product is active and ready for BigQuery integration.**")
+            st.success("**Data Product is active and ready for BigQuery integration.**")
