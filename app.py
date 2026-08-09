@@ -84,7 +84,7 @@ css = f"""
 }}
 
 /* Hide Streamlit chrome */
-header[data-testid="stHeader"], #MainMenu, footer, [data-testid="stToolbar"],
+#MainMenu, footer, [data-testid="stToolbar"],
 [data-testid="stDecoration"], [data-testid="stStatusWidget"], .stDeployButton {{
     display: none !important;
 }}
