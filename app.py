@@ -59,25 +59,28 @@ shadow = "none" if IS_DARK else "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,
 
 css = f"""
 <style>
-/* Variables */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* Google Material Variables */
 :root {{
-    --bg: {bg};
-    --bg-subtle: {bg_subtle};
-    --card: {card};
-    --border: {border};
-    --border-subtle: {border_subtle};
-    --text: {text};
-    --text-muted: #71717a;
-    --text-dim: {text_dim};
-    --accent: #4285F4;
-    --green: {green};
-    --green-muted: {green_muted};
-    --red: {red};
-    --red-muted: {red_muted};
-    --amber: #FBBC04;
-    --amber-muted: rgba(251,188,4,0.12);
-    --shadow: {shadow};
-    --radius: 10px;
+    --bg: #F8F9FA;
+    --bg-subtle: #F1F3F4;
+    --card: #FFFFFF;
+    --border: #DADCE0;
+    --border-subtle: #F1F3F4;
+    --text: #202124;
+    --text-muted: #5F6368;
+    --text-dim: #70757A;
+    --accent: #1A73E8;
+    --accent-hover: #1558D6;
+    --green: #188038;
+    --green-muted: #E6F4EA;
+    --red: #D93025;
+    --red-muted: #FCE8E6;
+    --amber: #F9AB00;
+    --amber-muted: #FEF7E0;
+    --shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+    --radius: 8px;
 }}
 
 /* Hide Streamlit chrome */
@@ -90,38 +93,45 @@ header[data-testid="stHeader"], #MainMenu, footer, [data-testid="stToolbar"],
 html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], .main, .block-container, section[data-testid="stMain"] {{
     background-color: var(--bg) !important;
     color: var(--text) !important;
-    font-family: 'DM Sans', -apple-system, sans-serif !important;
+    font-family: 'Roboto', 'Google Sans', -apple-system, sans-serif !important;
+}}
+
+h1, h2, h3, h4, h5, h6 {{
+    font-family: 'Google Sans', sans-serif !important;
+    color: var(--text) !important;
 }}
 
 .block-container {{
-    padding: 2rem 2.5rem 3rem !important;
+    padding: 2rem 3rem 4rem !important;
     max-width: 1400px !important;
 }}
 
 /* Component styling */
-.metric-card {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.4rem; box-shadow: var(--shadow); }}
-.metric-label {{ font-size: 0.85rem; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }}
-.metric-value {{ font-size: 2rem; font-weight: 700; color: var(--text); letter-spacing: -0.03em; margin-top: 0.3rem; }}
-.metric-delta {{ font-size: 0.75rem; font-weight: 500; margin-top: 0.4rem; padding: 2px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 3px; }}
+.metric-card {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); }}
+.metric-label {{ font-family: 'Google Sans', sans-serif; font-size: 0.875rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.5rem; }}
+.metric-value {{ font-family: 'Google Sans', sans-serif; font-size: 2.25rem; font-weight: 400; color: var(--text); line-height: 1.2; }}
+.metric-delta {{ font-size: 0.75rem; font-weight: 500; margin-top: 0.75rem; padding: 4px 8px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px; }}
 .delta-up {{ color: var(--green); background: var(--green-muted); }}
 .delta-down {{ color: var(--red); background: var(--red-muted); }}
 
-.chart-wrap {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.2rem 0.6rem; box-shadow: var(--shadow); }}
-.chart-title {{ font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }}
-.chart-subtitle {{ font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem; }}
+.chart-wrap {{ background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.5rem 0.5rem; box-shadow: var(--shadow); }}
+.chart-title {{ font-family: 'Google Sans', sans-serif; font-size: 1.125rem; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }}
+.chart-subtitle {{ font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; }}
 
-.data-table {{ width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.85rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }}
-.data-table th {{ text-align: left; padding: 0.8rem 1rem; color: var(--text-muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border); background: var(--bg-subtle); }}
-.data-table td {{ padding: 0.75rem 1rem; color: var(--text); border-bottom: 1px solid var(--border-subtle); }}
+.data-table {{ width: 100%; border-collapse: collapse; font-size: 0.875rem; background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }}
+.data-table thead {{ background: var(--bg-subtle); border-bottom: 2px solid var(--border); }}
+.data-table th {{ text-align: left; padding: 12px 16px; color: var(--text-muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }}
+.data-table td {{ padding: 12px 16px; color: var(--text); border-bottom: 1px solid var(--border); }}
 .data-table tr:last-child td {{ border-bottom: none; }}
-.data-table td.highlight {{ background-color: rgba(37,99,235,0.05); font-weight: 500; color: var(--accent); }}
+.data-table tbody tr:hover {{ background-color: var(--bg-subtle); }}
+.data-table td.highlight {{ background-color: #E8F0FE; color: var(--accent); font-weight: 500; }}
 
-.badge {{ display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }}
-.badge-green {{ color: var(--green); background: var(--green-muted); }}
-.badge-blue {{ color: var(--accent); background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.2); }}
+.badge {{ display: inline-block; padding: 4px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 500; font-family: 'Google Sans', sans-serif; }}
+.badge-green {{ color: var(--green); background: var(--green-muted); border: 1px solid #CEEAD6; }}
+.badge-blue {{ color: var(--accent); background: #E8F0FE; border: 1px solid #D2E3FC; }}
 
-.brand {{ font-size: 1.4rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem; }}
-.brand-icon {{ color: var(--accent); }}
+.brand {{ font-family: 'Google Sans', sans-serif; font-size: 1.5rem; font-weight: 500; color: var(--text); display: flex; align-items: center; gap: 0.75rem; }}
+.brand-icon {{ color: var(--accent); font-size: 1.75rem; }}
 
 .step-card {{ background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }}
 .step-title {{ font-size: 0.9rem; font-weight: 600; color: var(--text); }}
