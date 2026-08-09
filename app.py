@@ -51,10 +51,10 @@ border = "#1e1e24" if IS_DARK else "#e4e4e7"
 border_subtle = "#16161a" if IS_DARK else "#f0f0f2"
 text = "#fafafa" if IS_DARK else "#09090b"
 text_dim = "#52525b" if IS_DARK else "#a1a1aa"
-green = "#22c55e" if IS_DARK else "#16a34a"
-green_muted = "rgba(34,197,94,0.12)" if IS_DARK else "rgba(22,163,74,0.08)"
-red = "#ef4444" if IS_DARK else "#dc2626"
-red_muted = "rgba(239,68,68,0.12)" if IS_DARK else "rgba(220,38,38,0.08)"
+green = "#34A853"
+green_muted = "rgba(52,168,83,0.12)" if IS_DARK else "rgba(52,168,83,0.08)"
+red = "#EA4335"
+red_muted = "rgba(234,67,53,0.12)" if IS_DARK else "rgba(234,67,53,0.08)"
 shadow = "none" if IS_DARK else "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)"
 
 css = f"""
@@ -69,11 +69,13 @@ css = f"""
     --text: {text};
     --text-muted: #71717a;
     --text-dim: {text_dim};
-    --accent: #2563eb;
+    --accent: #4285F4;
     --green: {green};
     --green-muted: {green_muted};
     --red: {red};
     --red-muted: {red_muted};
+    --amber: #FBBC04;
+    --amber-muted: rgba(251,188,4,0.12);
     --shadow: {shadow};
     --radius: 10px;
 }}
@@ -253,6 +255,21 @@ if st.session_state.step == 1:
             
             render_table(df_enriched, highlight_cols=["Customer LTV ($)", "Segment"])
             st.success("✨ Metadata descriptions generated & derived fields added via Gemini API.")
+            
+            with st.expander("View Generated Metadata (Data Dictionary)"):
+                st.markdown("""
+                | Column Name | Generated Description |
+                |---|---|
+                | **Transaction ID** | Unique identifier for the payment transaction. |
+                | **User ID** | Identifier mapping to the customer profile. |
+                | **Merchant Code** | Internal code for the acquiring merchant. |
+                | **Transaction Amount ($)** | Total fiat value of the transaction in USD. |
+                | **Timestamp** | Date and time the transaction was authorized. |
+                | **Credit Card** | Masked primary account number (PAN). |
+                | **Customer Name** | Registered name of the cardholder. |
+                | **Customer LTV ($)** | *[AI Derived]* Predictive metric for customer lifetime value based on spend history. |
+                | **Segment** | *[AI Derived]* Categorical segmentation of the user for marketing targeting. |
+                """)
         else:
             st.info("Awaiting AI enrichment...")
             if st.button("✨ Suggest Derived Fields & Descriptions", type="primary"):
