@@ -43,19 +43,14 @@ if "model_generated" not in st.session_state:
 # ==========================================
 # 3. CSS DESIGN SYSTEM
 # ==========================================
-# Using Zinc/shadcn inspired theme
-bg = "#09090b" if IS_DARK else "#ffffff"
-bg_subtle = "#0c0c0f" if IS_DARK else "#f9fafb"
-card = "#0c0c0f" if IS_DARK else "#ffffff"
-border = "#1e1e24" if IS_DARK else "#e4e4e7"
-border_subtle = "#16161a" if IS_DARK else "#f0f0f2"
-text = "#fafafa" if IS_DARK else "#09090b"
-text_dim = "#52525b" if IS_DARK else "#a1a1aa"
-green = "#34A853"
-green_muted = "rgba(52,168,83,0.12)" if IS_DARK else "rgba(52,168,83,0.08)"
-red = "#EA4335"
-red_muted = "rgba(234,67,53,0.12)" if IS_DARK else "rgba(234,67,53,0.08)"
-shadow = "none" if IS_DARK else "0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03)"
+bg = "#202124" if IS_DARK else "#F8F9FA"
+bg_subtle = "#292A2D" if IS_DARK else "#F1F3F4"
+card = "#292A2D" if IS_DARK else "#FFFFFF"
+border = "#5F6368" if IS_DARK else "#DADCE0"
+border_subtle = "#3C4043" if IS_DARK else "#F1F3F4"
+text = "#E8EAED" if IS_DARK else "#202124"
+text_muted = "#9AA0A6" if IS_DARK else "#5F6368"
+text_dim = "#80868B" if IS_DARK else "#70757A"
 
 css = f"""
 <style>
@@ -63,14 +58,14 @@ css = f"""
 
 /* Google Material Variables */
 :root {{
-    --bg: #F8F9FA;
-    --bg-subtle: #F1F3F4;
-    --card: #FFFFFF;
-    --border: #DADCE0;
-    --border-subtle: #F1F3F4;
-    --text: #202124;
-    --text-muted: #5F6368;
-    --text-dim: #70757A;
+    --bg: {bg};
+    --bg-subtle: {bg_subtle};
+    --card: {card};
+    --border: {border};
+    --border-subtle: {border_subtle};
+    --text: {text};
+    --text-muted: {text_muted};
+    --text-dim: {text_dim};
     --accent: #1A73E8;
     --accent-hover: #1558D6;
     --green: #188038;
@@ -84,8 +79,7 @@ css = f"""
 }}
 
 /* Hide Streamlit chrome */
-#MainMenu, footer, [data-testid="stToolbar"],
-[data-testid="stDecoration"], [data-testid="stStatusWidget"], .stDeployButton {{
+#MainMenu, footer {{
     display: none !important;
 }}
 
